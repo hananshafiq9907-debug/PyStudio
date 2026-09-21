@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1020"><meta name="description" content="PyStudio — browser Python IDE">
+<title>PyStudio — Python IDE</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top"><button id="mobileMenu" class="icon">☰</button><div class="brand">🐍 <b>PyStudio</b><small>Python IDE</small></div><div class="project"><b>My Python Project</b><span id="saveState">Saved</span></div><div class="topActions"><button id="newFile">＋ File</button><button id="openFile">Open</button><button id="saveFile">Save</button><button id="run" class="run">▶ Run</button><button id="settings">⚙</button></div></header>
+<div class="layout">
+<aside class="activity"><button class="act active" data-pane="explorer">📁</button><button class="act" data-pane="search">🔎</button><button class="act" data-pane="notebook">📓</button><button class="act" data-pane="ai">✨</button><span></span><button class="act" data-pane="help">?</button></aside>
+<aside class="sidebar">
+<section id="explorer" class="pane"><div class="paneTitle">EXPLORER <button id="newFolder">＋</button></div><div class="workspace">WORKSPACE</div><div id="tree"></div><div class="sideButtons"><button id="upload">＋ Upload</button><button id="downloadProject">Export</button></div></section>
+<section id="search" class="pane hidden"><div class="paneTitle">SEARCH</div><input id="searchBox" placeholder="Search all files…"><div id="searchResults"></div></section>
+<section id="notebook" class="pane hidden"><div class="paneTitle">NOTEBOOK</div><button class="wide" id="addCell">＋ Code cell</button><button class="wide" id="addMarkdown">＋ Markdown</button><button class="wide" id="runAll">▶ Run all</button><div id="cells"></div></section>
+<section id="ai" class="pane hidden"><div class="paneTitle">CODING ASSISTANT</div><p class="muted">Local suggestions work offline. Optional server AI can be configured in Settings.</p><textarea id="aiPrompt" placeholder="Explain, fix, test, refactor…"></textarea><button class="wide accent" id="ask">✨ Analyze code</button><div class="aiTools"><button>Explain</button><button>Find issues</button><button>Tests</button><button>Refactor</button></div><pre id="aiResult"></pre></section>
+<section id="help" class="pane hidden"><div class="paneTitle">SHORTCUTS</div><p class="muted">Ctrl/Cmd+S Save<br>Ctrl/Cmd+Enter Run<br>Ctrl/Cmd+P Command palette<br>Ctrl/Cmd+Space Suggestions<br>Tab Indent</p></section>
+</aside>
+<main class="editorArea"><div class="tabs" id="tabs"></div><div class="crumb"><span id="fileName">main.py</span><span class="language">Python</span><button id="format">Format</button><button id="find">Find</button><button id="visualize">📊 Visualize</button></div><div class="editor"><pre id="gutter"></pre><textarea id="code" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea><div id="autocomplete" class="suggest hidden"></div></div><div id="aiHint" class="hint hidden"><b>✨ Suggestion</b><span id="hint"></span><button id="accept">Accept</button><button id="reject">×</button></div></main>
+<aside class="inspector"><div class="inspectTabs"><button class="selected" data-view="terminal">Terminal</button><button data-view="problems">Problems <i id="count">0</i></button><button data-view="debugger">Debug</button><button data-view="visual">Visual</button><button data-view="outline">Outline</button></div>
+<section id="terminal" class="view"><div class="head">OUTPUT / TERMINAL <button id="clear">Clear</button></div><pre id="output"></pre><div class="terminalInput">› <input id="terminalInput" placeholder="help, run, clear, files…"></div></section>
+<section id="problems" class="view hidden"><div class="head">PROBLEMS <button id="scan">Scan</button></div><div id="problemList"></div></section>
+<section id="debugger" class="view hidden"><div class="head">DEBUG <span id="debugStatus">Idle</span></div><button id="debugRun" class="wide">🐞 Run with breakpoints</button><h4>BREAKPOINTS</h4><div id="bps" class="muted">Click a line number to toggle.</div><h4>VARIABLES</h4><div id="vars"></div></section>
+<section id="visual" class="view hidden"><div class="head">VISUALIZATION <button id="refresh">Refresh</button></div><div id="visualContent"><div class="empty">Run code to inspect data.</div></div></section>
+<section id="outline" class="view hidden"><div class="head">OUTLINE</div><div id="outlineContent"></div></section></aside>
+</div><footer><span id="status">● Ready</span><span id="cursor">Ln 1, Col 1</span><span>UTF-8</span><span>Spaces 4</span><span>Python</span><span class="grow"></span><span id="runtime">Python: loading…</span></footer>
+</div>
+<div id="settingsModal" class="modal hidden"><div class="modalBox"><div class="modalHead"><h2>Settings</h2><button id="closeSettings">×</button></div><label>Theme<select id="theme"><option>dark</option><option>light</option><option>system</option></select></label><label>Accent<select id="accent"><option>violet</option><option>blue</option><option>green</option><option>orange</option></select></label><label>Font<select id="font"><option>Fira Code</option><option>JetBrains Mono</option><option>monospace</option></select></label><label>Font size <span><input id="fontSize" type="range" min="12" max="24" value="15"><b id="fontValue">15</b></span></label><label>Suggestions <input id="aiOn" type="checkbox" checked></label><label>Visualization <input id="vizOn" type="checkbox" checked></label><label>Word wrap <input id="wrap" type="checkbox"></label><label>Auto-save <input id="autosave" type="checkbox" checked></label><label>AI endpoint <input id="aiEndpoint" placeholder="optional /api/ai"></label><button class="wide" id="reset">Reset settings</button></div></div>
+<div id="commandPalette" class="modal hidden"><div class="commandBox"><input id="commandInput" placeholder="Type a command…"><div id="commands"></div></div></div>
+<input id="fileInput" type="file" multiple accept=".py,.txt,.json,.md,.csv,.ipynb" hidden>
+<script src="backend-bridge.js"></script><script src="app.js"></script>
+</body></html>
